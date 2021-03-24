@@ -8,9 +8,11 @@ var {
   radomCompanyName,
   radomJobName,
 } = require("./name_generator");
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = {
-  creataConversationByC: function (identity) {
+  creataConversationByC: function (identity, name) {
+    console.log(identity);
     return new Promise((resolve) => {
       const custName = radomCompanyName();
       const jobName = radomJobName();
@@ -19,13 +21,14 @@ module.exports = {
           uniqueName: "tanji-" + Math.random() * Math.random() * 1000,
           attributes: JSON.stringify({
             b: {
-              identity: radomApplyName(),
+              identity: uuidv4(),
               custName,
               jobName,
               isApplied: Math.random() > 0.5,
+              applicant: name,
             },
             c: {
-              identity: identity,
+              identity,
               custName,
               jobName,
             },
@@ -38,6 +41,7 @@ module.exports = {
     });
   },
   creataConversationByVip: function (identity) {
+    console.log(identity);
     return new Promise((resolve) => {
       const custName = radomCompanyName();
       const jobName = radomJobName();
@@ -46,13 +50,14 @@ module.exports = {
           uniqueName: "tanji-" + Math.random() * Math.random() * 1000,
           attributes: JSON.stringify({
             b: {
-              identity: identity,
+              identity,
               custName,
               jobName,
               isApplied: Math.random() > 0.5,
+              applicant: radomApplyName(),
             },
             c: {
-              identity: radomApplyName(),
+              identity: uuidv4(),
               custName,
               jobName,
             },
@@ -65,6 +70,7 @@ module.exports = {
     });
   },
   addPaticipent: function (cid, identity) {
+    console.log(identity);
     return new Promise((resolve) => {
       client.conversations
         .conversations(cid)

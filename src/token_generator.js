@@ -2,6 +2,7 @@ const Twilio = require("twilio");
 
 const config = require("./config");
 const { radomApplyName } = require("./name_generator");
+const { v4: uuidv4 } = require("uuid");
 
 // Access Token used for Video, IP Messaging, and Sync
 const AccessToken = Twilio.jwt.AccessToken;
@@ -16,8 +17,11 @@ const ChatGrant = AccessToken.ChatGrant;
  *         {Object.identity} String random indentity
  *         {Object.token} String token generated
  */
-function tokenGenerator(identity = 0) {
+function tokenGenerator(name) {
   // Create an access token which we will sign and return to the client
+
+  const id = uuidv4();
+
   const token = new AccessToken(
     config.TWILIO_ACCOUNT_SID,
     config.TWILIO_API_KEY,
@@ -25,7 +29,7 @@ function tokenGenerator(identity = 0) {
   );
 
   // Assign the provided identity or generate a new one
-  token.identity = identity || radomApplyName();
+  token.identity = id;
 
   if (config.TWILIO_CHAT_SERVICE_SID) {
     // Create a "grant" which enables a client to use IPM as a given user,
@@ -38,7 +42,8 @@ function tokenGenerator(identity = 0) {
 
   // Serialize the token to a JWT string and include it in a JSON response
   return {
-    identity: token.identity,
+    name,
+    id: token.identity,
     token: token.toJwt(),
   };
 }
