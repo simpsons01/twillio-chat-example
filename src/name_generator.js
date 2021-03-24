@@ -1,25 +1,20 @@
-const ADJECTIVES = [
-    'Abrasive', 'Brash', 'Callous', 'Daft', 'Eccentric', 'Fiesty', 'Golden',
-    'Holy', 'Ignominious', 'Joltin', 'Killer', 'Luscious', 'Mushy', 'Nasty',
-    'OldSchool', 'Pompous', 'Quiet', 'Rowdy', 'Sneaky', 'Tawdry',
-    'Unique', 'Vivacious', 'Wicked', 'Xenophobic', 'Yawning', 'Zesty',
+const APPLY_NAME = ["林小寬", "張偉", "王芳", "張敏", "王靜"];
+
+const COMPAMY_NAME = [
+  "104好食光咖啡廳",
+  "伊靈寺創意手搖飲",
+  "社團法人高雄市牙醫師公會",
+  "棠宇有限公司",
+  "依田股份有限公司",
+  "東森分眾傳媒股份有限公司",
 ];
 
-const FIRST_NAMES = [
-    'Anna', 'Bobby', 'Cameron', 'Danny', 'Emmett', 'Frida', 'Gracie', 'Hannah',
-    'Isaac', 'Jenova', 'Kendra', 'Lando', 'Mufasa', 'Nate', 'Owen', 'Penny',
-    'Quincy', 'Roddy', 'Samantha', 'Tammy', 'Ulysses', 'Victoria', 'Wendy',
-    'Xander', 'Yolanda', 'Zelda',
-];
-
-const LAST_NAMES = [
-    'Anchorage', 'Berlin', 'Cucamonga', 'Davenport', 'Essex', 'Fresno',
-    'Gunsight', 'Hanover', 'Indianapolis', 'Jamestown', 'Kane', 'Liberty',
-    'Minneapolis', 'Nevis', 'Oakland', 'Portland', 'Quantico', 'Raleigh',
-    'SaintPaul', 'Tulsa', 'Utica', 'Vail', 'Warsaw', 'XiaoJin', 'Yale',
-    'Zimmerman',
-];
+const JOB_NAME = ["秘書、行政人員", "作業員", "電商業務人員", "主管座車司機"];
 
 const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-module.exports = () => rand(ADJECTIVES) + rand(FIRST_NAMES) + rand(LAST_NAMES);
+module.exports = {
+  radomApplyName: () => rand(APPLY_NAME),
+  radomCompanyName: () => rand(COMPAMY_NAME),
+  radomJobName: () => rand(JOB_NAME),
+};

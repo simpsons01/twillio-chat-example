@@ -1,7 +1,7 @@
 const Twilio = require("twilio");
 
 const config = require("./config");
-const nameGenerator = require("./name_generator");
+const { radomApplyName } = require("./name_generator");
 
 // Access Token used for Video, IP Messaging, and Sync
 const AccessToken = Twilio.jwt.AccessToken;
@@ -25,7 +25,7 @@ function tokenGenerator(identity = 0) {
   );
 
   // Assign the provided identity or generate a new one
-  token.identity = identity || nameGenerator();
+  token.identity = identity || radomApplyName();
 
   if (config.TWILIO_CHAT_SERVICE_SID) {
     // Create a "grant" which enables a client to use IPM as a given user,

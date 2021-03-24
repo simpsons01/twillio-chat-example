@@ -3,7 +3,8 @@ const db = require("./db");
 const tokenGenerator = require("./token_generator");
 const router = new Router();
 const {
-  creataConversation,
+  creataConversationByC,
+  creataConversationByVip,
   addPaticipent,
   leavePaticipent,
 } = require("../src/coversation");
@@ -27,8 +28,15 @@ router.post("/create/user/:name", (req, res) => {
   res.send(payload);
 });
 
-router.post("/create/conversation/:name", (req, res) => {
-  creataConversation(req.params.name).then((sid) => {
+router.post("/create/c/conversation/:name", (req, res) => {
+  creataConversationByC(req.params.name).then((sid) => {
+    db.cidList.push(sid);
+    res.send({ data: db.cidList });
+  });
+});
+
+router.post("/create/vip/conversation/:name", (req, res) => {
+  creataConversationByVip(req.params.name).then((sid) => {
     db.cidList.push(sid);
     res.send({ data: db.cidList });
   });
