@@ -25,7 +25,8 @@ module.exports = {
         })
         .then((conversation) => {
           resolve(conversation.sid);
-        });
+        })
+        .catch((err) => console.log(err));
     });
   },
   addPaticipent: function (cid, identity) {
@@ -38,7 +39,8 @@ module.exports = {
             cid: cid,
             pid: participant.sid,
           })
-        );
+        )
+        .catch((err) => console.log(err));
     });
   },
   leavePaticipent: function (cid, pid) {
