@@ -23,15 +23,19 @@ module.exports = {
             b: {
               identity: uuidv4(),
               custName,
-              jobName,
-              isApplied: Math.random() > 0.5,
             },
             c: {
               identity,
               custName,
-              jobName,
-              applicant: name,
+              username: name,
             },
+            jobs: [
+              {
+                jobName,
+                isApplied: Math.random() > 0.5,
+                jobNo: uuidv4(),
+              },
+            ],
           }),
         })
         .then((conversation) => {
@@ -52,15 +56,19 @@ module.exports = {
             b: {
               identity,
               custName,
-              jobName,
-              isApplied: Math.random() > 0.5,
             },
             c: {
               identity: uuidv4(),
               custName,
-              jobName,
-              applicant: radomApplyName(),
+              username: radomApplyName(),
             },
+            jobs: [
+              {
+                jobName,
+                isApplied: Math.random() > 0.5,
+                jobNo: uuidv4(),
+              },
+            ],
           }),
         })
         .then((conversation) => {
@@ -86,7 +94,11 @@ module.exports = {
   },
   leavePaticipent: function (cid, pid) {
     return new Promise((resolve) => {
-      client.conversations.conversations(cid).participants(pid).remove();
+      client.conversations
+        .conversations(cid)
+        .participants(pid)
+        .remove()
+        .catch((err) => console.log(err));
       resolve();
     });
   },
