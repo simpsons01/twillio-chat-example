@@ -28,24 +28,42 @@ router.post("/create/user/:name", (req, res) => {
   res.send(payload);
 });
 
-router.post("/create/c/conversation/:name", (req, res) => {
+router.post("/create/:type/conversation/:name", (req, res) => {
+  const action =
+    req.params.type === "c" ? creataConversationByC : creataConversationByVip;
   const payload = db.userList.find((user) => user.name === req.params.name);
   if (payload) {
-    creataConversationByC(payload.id, payload.name).then((sid) => {
+    action(payload.id, payload.name).then((sid) => {
       db.cidList.push(sid);
-      res.send({ data: db.cidList });
+      res.send({ data: sid });
     });
   } else {
     res.status(400).send({ msg: "bad request" });
   }
 });
 
-router.post("/create/vip/conversation/:name", (req, res) => {
+router.post("/createandjoin/:type/conversation/:name", (req, res) => {
+  const action =
+    req.params.type === "c" ? creataConversationByC : creataConversationByVip;
   const payload = db.userList.find((user) => user.name === req.params.name);
   if (payload) {
-    creataConversationByVip(payload.id, payload.name).then((sid) => {
-      db.cidList.push(sid);
-      res.send({ data: db.cidList });
+    action(payload.id, payload.name).then((sid) => {
+      addPaticipent(sid, payload.id).then(({ cid, pid }) => {
+        db.cidList.push(sid);
+        db.userList.forEach((user) => {
+          if (user.id === payload.id) {
+            user.cid = cid;
+            user.pid = pid;
+          }
+        });
+        res.send({
+          data: {
+            ...payload,
+            cid,
+            pid,
+          },
+        });
+      });
     });
   } else {
     res.status(400).send({ msg: "bad request" });
@@ -78,6 +96,10 @@ router.get("/get/user/:name", (req, res) => {
   } else {
     res.status(400).send({ msg: "bad request" });
   }
+});
+
+router.get("/get/cidlist", (req, res) => {
+  res.send({ data: db.cidList });
 });
 
 router.delete("/remove/:userId/:sid", (req, res) => {

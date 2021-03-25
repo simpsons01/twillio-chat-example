@@ -25,12 +25,12 @@ module.exports = {
               custName,
               jobName,
               isApplied: Math.random() > 0.5,
-              applicant: name,
             },
             c: {
               identity,
               custName,
               jobName,
+              applicant: name,
             },
           }),
         })
@@ -54,12 +54,12 @@ module.exports = {
               custName,
               jobName,
               isApplied: Math.random() > 0.5,
-              applicant: radomApplyName(),
             },
             c: {
               identity: uuidv4(),
               custName,
               jobName,
+              applicant: radomApplyName(),
             },
           }),
         })
