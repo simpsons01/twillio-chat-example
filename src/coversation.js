@@ -14,26 +14,26 @@ module.exports = {
   creataConversationByC: function (identity, name) {
     console.log(identity);
     return new Promise((resolve) => {
-      const custName = radomCompanyName();
+      const companyName = radomCompanyName();
       const jobName = radomJobName();
       client.conversations.conversations
         .create({
           uniqueName: "tanji-" + Math.random() * Math.random() * 1000,
           attributes: JSON.stringify({
             b: {
-              identity: uuidv4(),
-              custName,
+              identities: [uuidv4()],
+              companyName: companyName,
             },
             c: {
               identity,
-              custName,
+              companyName: companyName,
               username: name,
             },
             jobs: [
               {
                 jobName,
                 isApplied: Math.random() > 0.5,
-                jobNo: uuidv4(),
+                jobId: uuidv4(),
               },
             ],
           }),
@@ -47,7 +47,7 @@ module.exports = {
   creataConversationByVip: function (identity) {
     console.log(identity);
     return new Promise((resolve) => {
-      const custName = radomCompanyName();
+      const companyName = radomCompanyName();
       const jobName = radomJobName();
       client.conversations.conversations
         .create({
@@ -55,18 +55,18 @@ module.exports = {
           attributes: JSON.stringify({
             b: {
               identity,
-              custName,
+              companyName,
             },
             c: {
               identity: uuidv4(),
-              custName,
+              companyName,
               username: radomApplyName(),
             },
             jobs: [
               {
                 jobName,
                 isApplied: Math.random() > 0.5,
-                jobNo: uuidv4(),
+                jobId: uuidv4(),
               },
             ],
           }),
