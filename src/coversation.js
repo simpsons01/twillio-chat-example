@@ -22,6 +22,7 @@ module.exports = {
           attributes: JSON.stringify({
             b: {
               identities: [uuidv4()],
+              companyId: uuidv4(),
               companyName: companyName,
             },
             c: {
