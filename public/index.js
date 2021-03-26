@@ -104,7 +104,8 @@ $(function () {
       const payload = JSON.stringify({val: { 
         jobName: "秘書、行政人員",
         jobNo: "abc123",
-        jobDescription: "時薪 160-240元 / 小時 ｜午班，晚班，假日班…",
+        wage: "$666/時",
+        workTime: ["DAY"],
         publishTime: "2021/3/5",
       }});
       generalCoversation.sendMessage(payload, {type: "job", role: "c"});
