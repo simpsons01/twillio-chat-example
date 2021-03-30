@@ -90,7 +90,7 @@ $(function () {
         return;
       }
       const payload = JSON.stringify({ val: $input.val() });
-      generalCoversation.sendMessage(payload, { type: "text", role: "b" });
+      generalCoversation.sendMessage(payload, {type: "text", role: "b"});
       $input.val("");
     }
     if (e.keyCode == 112) {
@@ -101,17 +101,17 @@ $(function () {
         );
         return;
       }
-      const payload = JSON.stringify({
-        val: {
-          jobName: "秘書、行政人員",
-          jobNo: "abc123",
-          jobDescription: "時薪 160-240元 / 小時 ｜午班，晚班，假日班…",
-          publishTime: "2021/3/5",
-        },
-      });
-      generalCoversation.sendMessage(payload, { type: "job", role: "c" });
+      const payload = JSON.stringify({val: { 
+        jobName: "秘書、行政人員",
+        jobNo: "abc123",
+        wage: "$666/時",
+        workTime: ["DAY"],
+        publishTime: "2021/3/5",
+      }});
+      generalCoversation.sendMessage(payload, {type: "job", role: "c"});
       $input.val("");
     }
+
     if (e.keyCode == 113) {
       if (generalCoversation === undefined) {
         print(
@@ -120,17 +120,16 @@ $(function () {
         );
         return;
       }
-      const payload = JSON.stringify({
-        val: {
-          jobName: "秘書、行政人員",
-          jobNo: "abc123",
-          jobDescription: "時薪 160-240元 / 小時 ｜午班，晚班，假日班…",
-          publishTime: "2021/3/5",
-          appliedTime: "2021/4/1",
-          coverLetter: $input.val(),
-        },
-      });
-      generalCoversation.sendMessage(payload, { type: "apply", role: "c" });
+      const payload = JSON.stringify({val: { 
+        jobName: "秘書、行政人員",
+        jobNo: "abc123",
+        wage: "$666/時",
+        workTime: ["DAY"],
+        publishTime: 1614329508000,
+        appliedTime: 1614329508000,
+        coverLetter: $input.val()
+      }});
+      generalCoversation.sendMessage(payload, {type: "apply", role: "c"});
       $input.val("");
     }
   });

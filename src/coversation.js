@@ -103,4 +103,14 @@ module.exports = {
       resolve();
     });
   },
+  updateConversationAttr: function(cid, attrs) {
+    const attributes = JSON.stringify(attrs);
+    return new Promise((resolve) => {
+      client.conversations
+        .conversations(cid)
+        .update({ attributes })
+        .then(conversation => resolve(conversation))
+        .catch((err) => console.log(err));
+    });
+  }
 };

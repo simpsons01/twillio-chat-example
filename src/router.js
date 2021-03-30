@@ -7,6 +7,7 @@ const {
   creataConversationByVip,
   addPaticipent,
   leavePaticipent,
+  updateConversationAttr
 } = require("../src/coversation");
 
 router.post("/create/user/:name", (req, res) => {
@@ -113,6 +114,18 @@ router.delete("/remove/:userId/:sid", (req, res) => {
     });
     res.send({ data: db.userList });
   });
+});
+
+router.post("/edit/:sid", (req, res) => {
+  const sid = req.params.sid;
+  const attrs = req.body;
+  if(sid && attrs) {
+    updateConversationAttr(sid, attrs).then((conversation) => {
+      res.send(conversation);
+    }).catch(err=>console.log(err));
+  } else {
+    res.status(400).send({ msg: "bad request" });
+  }
 });
 
 module.exports = router;
