@@ -24,11 +24,12 @@ module.exports = {
               identities: [uuidv4()],
               companyId: uuidv4(),
               companyName: companyName,
+              companyLogo: "url"
             },
             c: {
               identity,
-              companyName: companyName,
               username: name,
+              avatar: "url"
             },
             jobs: [
               {
@@ -60,7 +61,6 @@ module.exports = {
             },
             c: {
               identity: uuidv4(),
-              companyName,
               username: radomApplyName(),
             },
             jobs: [
